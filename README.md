@@ -1,5 +1,10 @@
 The server is hosted at https://collate-task.herokuapp.com/
 
+### Frontend
+1. `/login`
+2. `/signup`
+
+
 ### API's present
 
 1. /api/v1/signup               -> POST
