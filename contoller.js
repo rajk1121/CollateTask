@@ -10,7 +10,7 @@ const middleware = async (req, res, next) => {
             if (req.cookies.jwt != 'logout') {
                 let decoded = jsonwebtoken.verify(req.cookies.jwt, SECRET_KEY);
                 if (!decoded) {
-                    res.json(201).json({
+                    res.status(201).json({
                         status: "User not logged in"
                     })
                     return;
@@ -19,14 +19,14 @@ const middleware = async (req, res, next) => {
 
                 var dbdata = await userModel.findById(decoded.id);
                 if (!dbdata) {
-                    res.json(201).json({
+                    res.status(201).json({
                         status: "User not logged in"
                     })
                     return;
                 }
                 next();
             } else {
-                res.json(201).json({
+                res.status(201).json({
                     status: "User not logged in"
                 })
                 return;
