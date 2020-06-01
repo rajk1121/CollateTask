@@ -6,7 +6,7 @@ const slowDown = require('express-slow-down');
 const xss = require('xss-clean');
 const expressSanitizer = require('express-mongo-sanitize');
 const helmet = require('helmet');
-
+const { viewSignup, viewTasks, viewLogin, viewUpdate } = require('./viewController')
 const { create, update, login, signup, middleware, remove, getAll, getAllTasks, logout } = require('./contoller');
 
 const limiter = rateLimitter({
@@ -23,11 +23,18 @@ const speedLimiter = slowDown({
 
 app.use(express.json())
 app.use(helmet());
+
+app.set("view engine", "pug");
+app.set("views", "template");
 app.use(speedLimiter);
 app.use(limiter);
 app.use(expressSanitizer());
 app.use(xss());
 app.use(cookieparser())
+
+app.use(express.static('public'))
+app.get('/signup', viewSignup)
+app.get(['/', '/login'], viewLogin)
 app.post('/api/v1/signup', signup)
 app.post('/api/v1/login', login)
 app.use(middleware)
@@ -36,6 +43,9 @@ app.patch('/api/v1/updateTask', update)
 app.get('/api/v1/getAllTasks', getAll)
 app.delete('/api/v1/deleteTask', remove)
 app.post('/api/v1/logout', logout)
+app.get('/view', viewTasks)
+app.get('/update', viewUpdate)
+
 const port = process.env.PORT || 80
 app.listen(port, function () {
     console.log("Server listening at port " + port)

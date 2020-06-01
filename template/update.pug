@@ -1,0 +1,38 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Document
+form(action='')
+  -console.log(result)
+  span Id :
+  input#id(type='text' value=`${result['_id']}` readonly)
+  br
+  br
+  span Name : 
+  input#name(type='text' name='' value=`${result['name']}`)
+  br
+  br
+  span Description : 
+  input#description(type='text' name='' value=`${result['description']}`)
+  br
+  br
+  span Deadline : 
+  input#deadline(type='text' name='' placeholder='yyyy-mm-dd' value=`${result['deadline']}`)
+  br
+  br
+  span Created : 
+  input#deadline(type='text' name='' placeholder='yyyy-mm-dd' value=`${result['created']}` readonly)
+  br
+  br
+  
+  span Status : 
+  input#status(type='text' name='' value=`${result['status']}`)
+  span Not Started OR Ongoing OR Completed
+  br
+  button.btn(type='submit') Submit
+
+
+
+script(src="https://unpkg.com/axios/dist/axios.min.js")
+script(src="update.js")

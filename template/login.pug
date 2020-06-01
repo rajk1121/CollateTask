@@ -1,0 +1,19 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Document
+form.form
+  span Email : 
+  input#email(name='email' type='email')
+  br
+  span Password : 
+  input#password(name='password' type='password' minlength='8')
+  br
+  button.btn(type="submit") submit
+  br
+  br
+  a(href="/signup") Signup
+  
+  script(src='./login.js')
+  script(src="https://unpkg.com/axios/dist/axios.min.js")

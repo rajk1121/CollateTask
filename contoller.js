@@ -47,10 +47,12 @@ const middleware = async (req, res, next) => {
 }
 const login = async (req, res) => {
     try {
+
         let data = req.body;
         if (!data.email || !data.password) {
 
             res.end('Information Not Available');
+            return
         }
         let dbdata = await userModel.findOne({
             email: data.email
@@ -58,11 +60,13 @@ const login = async (req, res) => {
 
         if (!dbdata) {
             res.end("User Not Found");
+            return
         }
 
         let ans = await bcrypt.compare(data.password, dbdata.password);
         if (!ans) {
             res.status(400).json({ status: "Password Incorrect" });
+            return
         }
         let token = jsonwebtoken.sign({ id: dbdata._id }, SECRET_KEY, { expiresIn: "3h" });
 
@@ -145,7 +149,6 @@ const update = async (req, res) => {
         }
         let id = req.query.id;
         let decoded = jsonwebtoken.verify(req.cookies.jwt, SECRET_KEY);
-        console.log(decoded)
         let resultOne = await taskModel.findById(id);
         console.log(resultOne)
         if (resultOne.user._id != decoded.id) {
@@ -155,7 +158,6 @@ const update = async (req, res) => {
         }
         else {
             let result = await taskModel.findByIdAndUpdate(id, data, { new: true });
-
             res.status(201).json({
                 status: "Updated",
                 result: result
@@ -171,6 +173,7 @@ const update = async (req, res) => {
 const remove = async (req, res) => {
     try {
         let id = req.query.id;
+        console.log("*******************************")
         let decoded = jsonwebtoken.verify(req.cookies.jwt, SECRET_KEY);
         let resultOne = await taskModel.findById(id);
         if (resultOne.user._id != decoded.id) {
@@ -179,7 +182,7 @@ const remove = async (req, res) => {
             })
             return
         }
-        let result = await userModel.findByIdAndDelete(id)
+        let result = await taskModel.findByIdAndDelete(id)
 
 
         res.status(201).json({
@@ -201,6 +204,7 @@ const getAll = async (req, res) => {
             res.json(201).json({
                 status: "User not logged in"
             })
+            return
         }
         let result = await taskModel.find({ 'user': decoded.id })
         res.status(201).json({
