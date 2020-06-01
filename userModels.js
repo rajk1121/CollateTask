@@ -3,7 +3,7 @@ const validator = require("validator");
 const bcrypt = require('bcrypt')
 const Schema = mongoose.Schema;
 
-const DB = "mongodb+srv://rajk1121:Rajat1121@cluster0-chamy.mongodb.net/test?retryWrites=true&w=majority"
+const DB = process.env.DBSERVER;
 mongoose.connect(DB, {
     useNewUrlParser: true
 }).then(conn => {

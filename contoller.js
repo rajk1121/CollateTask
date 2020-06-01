@@ -3,7 +3,7 @@ const Models = require('./userModels')
 const userModel = Models.userModels;
 const taskModel = Models.TaskModels;
 const bcrypt = require('bcrypt')
-const SECRET_KEY = "SECREET_KEY";
+const SECRET_KEY = process.env.secret;
 const middleware = async (req, res, next) => {
     try {
         if (req.cookies.jwt) {
