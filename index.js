@@ -7,7 +7,7 @@ const xss = require('xss-clean');
 const expressSanitizer = require('express-mongo-sanitize');
 const helmet = require('helmet');
 
-const { create, update, login, signup, middleware, remove, getAll, getAllTasks } = require('./contoller');
+const { create, update, login, signup, middleware, remove, getAll, getAllTasks, logout } = require('./contoller');
 
 const limiter = rateLimitter({
     windowMs: 15 * 60 * 1000, // 15 minutes
@@ -35,6 +35,7 @@ app.post('/api/v1/createTask', create)
 app.patch('/api/v1/updateTask', update)
 app.get('/api/v1/getAllTasks', getAll)
 app.delete('/api/v1/deleteTask', remove)
+app.post('/api/v1/logout', logout)
 const port = process.env.PORT || 80
 app.listen(port, function () {
     console.log("Server listening at port " + port)

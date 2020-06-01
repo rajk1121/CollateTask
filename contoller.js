@@ -230,4 +230,16 @@ const getAllTasks = async (req, res) => {
         })
     }
 }
-module.exports = { create, update, login, signup, middleware, remove, getAll, getAllTasks }
+const logout = (req, res) => {
+    try {
+        res.cookie("jwt", "logout", { "httpOnly": true });
+        res.status(200).json({
+            status: "Logout Successfull"
+        })
+    } catch (err) {
+        res.json(400).json({
+            status: "Error"
+        })
+    }
+}
+module.exports = { create, update, login, signup, middleware, remove, getAll, getAllTasks, logout }
