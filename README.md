@@ -1,4 +1,4 @@
-The server is hsted at https://collate-task.herokuapp.com/
+The server is hosted at https://collate-task.herokuapp.com/
 
 ### API's present
 
@@ -39,7 +39,7 @@ It gets all the task for that user
 `/api/v1/deleteTask?id=`
 
 
-In query - > id of the task to be updated
+In query - > id of the task to be deleted
 
 `/api/v1/logout`
 
