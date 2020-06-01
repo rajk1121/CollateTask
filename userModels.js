@@ -28,7 +28,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         validate: function abc(val) {
-            if (!validator.isLength(val, { min: 8, max: undefined }) || !validator.isAlphanumeric(val)) {
+            if (!validator.isLength(val, { min: 8, max: undefined }) || !validator.isAlphanumeric(val, 'en-US')) {
                 throw new Error("Password should be alphanumeric. Passwordlength is too short. Should be minimum of 8 in length")
             }
         }
