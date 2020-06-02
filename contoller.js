@@ -147,7 +147,7 @@ const update = async (req, res) => {
             })
             return;
         }
-        if (data.name.length == 0 || data.description == 0 || data.status.length == 0) {
+        if (data.name.length == 0 || data.description.length == 0 || data.status.length == 0) {
             res.status(400).json({
                 status: "Invalid Body"
             })
