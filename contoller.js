@@ -163,7 +163,7 @@ const update = async (req, res) => {
             })
             return;
         }
-        let date = new Date(req.deadline)
+        let date = new Date(data.deadline)
         if (date == "Invalid Date") {
             console.log("invalid date")
             res.status(400).json({
