@@ -141,7 +141,26 @@ const create = async (req, res) => {
 const update = async (req, res) => {
     try {
         let data = req.body;
-        if (!data.name && !data.description && !data.created && !data.deadline && !data.status) {
+        if (!data.name || !data.description || !data.created || !data.deadline || !data.status) {
+            res.status(400).json({
+                status: "Invalid Body"
+            })
+            return;
+        }
+        if (data.name.length == 0 || data.description == 0 || data.status.length == 0) {
+            res.status(400).json({
+                status: "Invalid Body"
+            })
+            return;
+        }
+        if (data.status != "Completed" && data.status != "Ongoing" && data.status != "Not Started") {
+            res.status(400).json({
+                status: "Invalid Body"
+            })
+            return;
+        }
+        let date = new Date(req.deadline)
+        if (date == "Invalid Date") {
             res.status(400).json({
                 status: "Invalid Body"
             })
