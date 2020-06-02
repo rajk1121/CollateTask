@@ -142,18 +142,21 @@ const update = async (req, res) => {
     try {
         let data = req.body;
         if (!data.name || !data.description || !data.created || !data.deadline || !data.status) {
+            console.log("body")
             res.status(400).json({
                 status: "Invalid Body"
             })
             return;
         }
         if (data.name.length == 0 || data.description.length == 0 || data.status.length == 0) {
+            console.log("length")
             res.status(400).json({
                 status: "Invalid Body"
             })
             return;
         }
         if (data.status != "Completed" && data.status != "Ongoing" && data.status != "Not Started") {
+            console.log("status")
             res.status(400).json({
                 status: "Invalid Body"
             })
@@ -161,6 +164,7 @@ const update = async (req, res) => {
         }
         let date = new Date(req.deadline)
         if (date == "Invalid Date") {
+            console.log("invalid date")
             res.status(400).json({
                 status: "Invalid Body"
             })
