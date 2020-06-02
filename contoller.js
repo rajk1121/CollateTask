@@ -142,7 +142,7 @@ const update = async (req, res) => {
     try {
         let data = req.body;
         console.log(data)
-        if (!data.name || !data.description || !data.created || !data.deadline || !data.status) {
+        if (!data.name || !data.description || !data.deadline || !data.status) {
             console.log("body")
             res.status(400).json({
                 status: "Invalid Body"
